@@ -14,6 +14,14 @@ API REST foi implementada utilizando um módulo node chamado [node-restful](http
 
 ## Configuração
 
+### Rodando com Docker
+
+```
+sudo docker-compose up
+```
+
+### Sem Docker
+
 1. Instalar os módulos do node utilizando o **npm**.
 ```sh
 $ npm install
