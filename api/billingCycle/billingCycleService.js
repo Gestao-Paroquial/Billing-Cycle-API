@@ -36,12 +36,12 @@ BillingCycle.route("count", function(req, res, next) {
 BillingCycle.route("findByComunidade", function(req, res, next) {
   const comunidade_id = req.query.id;
 
-  BillingCycle.find({ comunidade_id }, function(error, value) {
+  BillingCycle.find({ comunidade_id }, function(error, result) {
     if (error) {
       res.status(500).json({ errors: [error] });
     } else {
       console.log();
-      res.json({ value });
+      res.json(result);
     }
   });
 });
