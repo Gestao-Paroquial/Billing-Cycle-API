@@ -12,8 +12,10 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "cors": "^2.8.4",
     "dotenv": "^5.0.1",
     "express": "^4.14.0",
+    "express-jwt": "^5.3.1",
     "express-query-int": "^1.0.1",
     "lodash": "^4.17.2",
     "mongoose": "^4.7.0",
