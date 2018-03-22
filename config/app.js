@@ -15,7 +15,7 @@ app.use(allowCors)
 app.use(queryParser())
 app.use(cors())
 
-app.use(jwt({ secret: process.env.JWT_SECRET }).unless({ path: ['/token'] }))
+// app.use(jwt({ secret: process.env.JWT_SECRET }).unless({ path: ['/token'] }))
 
 app.listen(port, () => {
   console.log(`BACKEND is running on port ${port}.`)
