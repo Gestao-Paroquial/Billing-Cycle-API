@@ -2,6 +2,7 @@ const port = 3003
 
 const bodyParser = require('body-parser')
 const express = require('express')
+
 const app = express()
 const allowCors = require('./cors')
 const queryParser = require('express-query-int')
@@ -14,9 +15,9 @@ app.use(allowCors)
 app.use(queryParser())
 app.use(cors())
 
-app.use(jwt({ secret: process.env.JWT_SECRET}).unless({path: ['/token']}));
+app.use(jwt({ secret: process.env.JWT_SECRET }).unless({ path: ['/token'] }))
 
-app.listen(port, function () {
+app.listen(port, () => {
   console.log(`BACKEND is running on port ${port}.`)
 })
 
