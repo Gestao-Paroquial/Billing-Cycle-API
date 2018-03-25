@@ -17,7 +17,9 @@ API REST foi implementada utilizando um módulo node chamado [node-restful](http
 ### Rodando com Docker
 
 ```
-sudo docker-compose up
+docker build -t billingcycleapi_app .
+docker run --name database -d mongo
+docker run -p 3003:3003 -d --name api --link database:database billingcycleapi_app 
 ```
 
 ### Sem Docker
