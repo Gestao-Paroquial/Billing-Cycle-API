@@ -9,5 +9,9 @@ before_deploy:
 - eval "$(ssh-agent -s)"
 - chmod 600 /tmp/deploy_rsa
 - ssh-add /tmp/deploy_rsa
-script:
-  - bash ./script.sh
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR teste@165.227.197.233:/var/www/files
+  on:
+    branch: master
