@@ -12,3 +12,5 @@ touch ~/teste.txt
 #   cd ~
 #   ~/touch batata.txt # Change to whatever commands you need!
 # EOF
+
+ssh deploy@165.227.197.233
