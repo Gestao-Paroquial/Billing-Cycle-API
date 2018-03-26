@@ -14,6 +14,6 @@ script:
 deploy:
   provider: script
   skip_cleanup: true
-  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR deploy@165.227.197.233:/var/www/files
+  script: bash ./deploy.sh
   on:
     branch: master
