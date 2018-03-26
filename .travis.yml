@@ -13,11 +13,10 @@ addons:
 
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_9876fe5253b3_key -iv $encrypted_9876fe5253b3_iv
-  -in deploy.enc -out /tmp/deploy -
+  -in deploy.enc -out /tmp/deploy -d
 
 script:
   - bash ./script.sh
-
 deploy:
   provider: script
   skip_cleanup: true
