@@ -7,4 +7,4 @@ rm deploy.enc # Don't need it anymore
 chmod 600 deploy
 mv deploy ~/.ssh/id_rsa
 
-touch ~/teste.txt
+touch /var/www/node_api/batata.txt
