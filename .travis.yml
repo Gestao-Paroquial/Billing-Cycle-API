@@ -4,3 +4,5 @@ node_js:
   - '8.9.4'
 before_install:
   - bash _scripts/install.sh
+script:
+  - bash _scripts/build.sh
