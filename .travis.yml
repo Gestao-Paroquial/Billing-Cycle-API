@@ -5,8 +5,10 @@ addons:
   ssh_known_hosts: 165.227.197.233
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_9876fe5253b3_key -iv $encrypted_9876fe5253b3_iv
-  -in deploy.enc -out deploy -d
+  -in deploy.enc -out /tmp/deploy -d
 - eval "$(ssh-agent -s)"
+- chmod 600 /tmp/deploy
+- ssh-add /tmp/deploy
 script:
   - bash ./script.sh
 deploy:
