@@ -17,7 +17,7 @@ API REST foi implementada utilizando um módulo node chamado [node-restful](http
 ### Rodando com Docker
 
 ```
-sudo docker-compose up
+docker-compose up -d
 ```
 
 ### Sem Docker
