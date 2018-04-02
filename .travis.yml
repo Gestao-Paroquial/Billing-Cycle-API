@@ -8,11 +8,11 @@ cache:
 addons:
   ssh_known_hosts: 165.227.197.233
 script:
-- bash ./script.sh
+- bash ./scripts/script.sh
 deploy:
   provider: script
   skip_cleanup: true
-  script: bash ./deploy.sh
+  script: bash ./scripts/deploy.sh
   on:
     branch: master
 before_install:
