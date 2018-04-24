@@ -13,6 +13,8 @@ module.exports = (app) => {
 
   router.route('/billingSummary').get(billingSummaryService.getSummary)
 
+  router.route('/movimentacaoAnual').get(billingSummaryService.annualTurnover)
+
   router.route('/facebook').get((req, res, next) => {
     fetch(`https://graph.facebook.com/v2.12/829673350416518?fields=fan_count&access_token=${process.env.FB_PAGE_TOKEN}`)
       .then(response => response.json())
