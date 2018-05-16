@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 const express = require('express')
-const billingCycleService = require('../api/billingCycle/billingCycleService')
+// const billingCycleService = require('../api/billingCycle/billingCycleService')
 const billingSummaryService = require('../api/billingSummary/billingSummaryService')
 
 module.exports = (app) => {
@@ -9,7 +9,7 @@ module.exports = (app) => {
   app.use('/api', router)
 
   // rotas da API
-  billingCycleService.register(router, '/billingCycles')
+  // billingCycleService.register(router, '/billingCycles')
 
   router.route('/billingSummary').get(billingSummaryService.getSummary)
 

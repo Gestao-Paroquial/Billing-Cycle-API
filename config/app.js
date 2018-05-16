@@ -23,7 +23,7 @@ app.use('/graphql', graphqlHTTP({
   graphiql: process.env.NODE_ENV === 'development'
 }))
 
-if (process.env.NODE_ENV === 'development') app.use(jwt({ secret: process.env.JWT_SECRET }).unless({ path: ['/token'] }))
+if (process.env.NODE_ENV !== 'development') app.use(jwt({ secret: process.env.JWT_SECRET }).unless({ path: ['/token'] }))
 
 app.listen(port, () => {
   console.log(`BACKEND is running on port ${port}.`)

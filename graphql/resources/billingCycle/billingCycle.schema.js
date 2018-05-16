@@ -24,9 +24,11 @@ const billingCycleTypes = `
   }
 
   input BillingCycleInput {
-    billingCycle: String!
-    user: Int!
-    post: Int!
+    name: String!
+    date: String!
+    comunidade_id: Int,
+    debts: [Debt]!
+    credits: [Credit]!
   }
 `
 
