@@ -3,7 +3,7 @@ const { query } = require('./query')
 const { mutation } = require('./mutation')
 const { billingCycleTypes, debtTypes, creditTypes } = require('./resources/billingCycle/billingCycle.schema')
 
-const { queryResolvers } = require('./resources/billingCycle/billingCycle.resolvers')
+const { queryResolvers, mutationsResolver } = require('./resources/billingCycle/billingCycle.resolvers')
 
 const schemaDefinition = `
   type Schema {
@@ -15,6 +15,9 @@ const schemaDefinition = `
 const resolvers = {
   Query: {
     ...queryResolvers
+  },
+  Mutation: {
+    ...mutationsResolver
   }
 
 }

@@ -1,6 +1,7 @@
 const BillingCycle = require('../../../api/billingCycle/billingCycle')
 
 const queryResolvers = {
+  billingCycle: (parent, { id }) => BillingCycle.findById(id),
   billingCycles: (parent, {
     first = 0,
     offset = 10
@@ -17,12 +18,17 @@ const queryResolvers = {
   count: (parent, params) => BillingCycle.count()
 }
 
-// const mutationsResolver = {
-//   createBillingCycle: (parent, { input }) => {
-//     // console.log(input)
-//   }
-// }
+const mutationsResolver = {
+  createBillingCycle: (parent, { input }) => BillingCycle.create(input),
+  updateBillingCycle: (parent, { id, input }) => BillingCycle.findOneAndUpdate({ _id: id }, input),
+  deleteBillingCycle: async (parent, { id }) => {
+    const billingCycle = await BillingCycle.findByIdAndRemove({ _id: id })
+
+    return !!billingCycle
+  }
+}
 
 module.exports = {
-  queryResolvers
+  queryResolvers,
+  mutationsResolver
 }

@@ -4,10 +4,20 @@ const creditTypes = `
   name: String!
   value: Float!
  }
+
+ input CreditInput {
+  name: String!
+  value: Float!
+ }
 `
 
 const debtTypes = `
  type Debt {
+  name: String!
+  value: Float!
+ }
+
+ input DebtInput {
   name: String!
   value: Float!
  }
@@ -26,14 +36,15 @@ const billingCycleTypes = `
   input BillingCycleInput {
     name: String!
     date: String!
-    comunidade_id: Int,
-    debts: [Debt]!
-    credits: [Credit]!
+    comunidade_id: Int
+    debts: [DebtInput]
+    credits: [CreditInput]
   }
 `
 
 const billingCycleQueries = `
   billingCycles(first: Int, offset: Int): [BillingCycle!]!
+  billingCycle(id: ID!): BillingCycle!
   findByComunidadeId(comunidade_id: Int!): [BillingCycle!]!
   count: Int!
 `
