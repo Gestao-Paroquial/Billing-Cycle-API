@@ -38,6 +38,11 @@ const billingCycleTypes = `
     debt: Float!
   }
 
+  type AnnualTurnover {
+    month: String!
+    summary: Summary!
+  }
+
   input BillingCycleInput {
     name: String!
     date: String!
@@ -53,6 +58,7 @@ const billingCycleQueries = `
   findByComunidadeId(comunidade_id: Int!): [BillingCycle!]!
   count: Int!
   getSummary: Summary!
+  annualTurnover: [AnnualTurnover]!
 `
 
 const billingCycleMutations = `
