@@ -33,6 +33,11 @@ const billingCycleTypes = `
     credits: [Credit]!
   }
 
+  type Summary {
+    credit: Float!
+    debt: Float!
+  }
+
   input BillingCycleInput {
     name: String!
     date: String!
@@ -47,6 +52,7 @@ const billingCycleQueries = `
   billingCycle(id: ID!): BillingCycle!
   findByComunidadeId(comunidade_id: Int!): [BillingCycle!]!
   count: Int!
+  getSummary: Summary!
 `
 
 const billingCycleMutations = `

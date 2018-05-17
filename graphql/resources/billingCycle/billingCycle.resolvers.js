@@ -15,7 +15,22 @@ const queryResolvers = {
     BillingCycle.find({
       comunidade_id
     }),
-  count: (parent, params) => BillingCycle.count()
+  count: (parent, params) => BillingCycle.count(),
+  getSummary: async () => {
+    const summary = await BillingCycle.aggregate([
+      {
+        $project: { credit: { $sum: '$credits.value' }, debt: { $sum: '$debts.value' } }
+      },
+      {
+        $group: { _id: null, credit: { $sum: '$credit' }, debt: { $sum: '$debt' } }
+      },
+      {
+        $project: { _id: 0, credit: 1, debt: 1 }
+      }
+    ])
+
+    return summary.shift()
+  }
 }
 
 const mutationsResolver = {
