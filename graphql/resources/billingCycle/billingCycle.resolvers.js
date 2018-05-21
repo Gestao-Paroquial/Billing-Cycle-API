@@ -23,7 +23,7 @@ const queryResolvers = {
       comunidade_id
     }),
   count: (parent, params) => BillingCycle.count(),
-  getSummary: async () => {
+  summary: async () => {
     const summary = await BillingCycle.aggregate([
       {
         $project: { credit: { $sum: '$credits.value' }, debt: { $sum: '$debts.value' } }

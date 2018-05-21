@@ -57,7 +57,7 @@ const billingCycleQueries = `
   billingCycle(id: ID!): BillingCycle!
   findByComunidadeId(comunidade_id: Int!): [BillingCycle!]!
   count: Int!
-  getSummary: Summary!
+  summary: Summary!
   annualTurnover: [AnnualTurnover]!
 `
 
