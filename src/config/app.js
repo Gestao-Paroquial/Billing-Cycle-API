@@ -1,4 +1,7 @@
-const port = 3003
+const {
+  port = 3003,
+  host = '127.0.0.1',
+} = process.env
 
 const bodyParser = require('body-parser')
 const express = require('express')
@@ -25,8 +28,8 @@ app.use('/graphql', graphqlHTTP({
   graphiql: process.env.NODE_ENV === 'development',
 }))
 
-app.listen(port, () => {
-  console.log(`BACKEND is running on port ${port}.`)
+app.listen(port, host, () => {
+  console.log(`BACKEND is running on http://${host}:${port}`)
 })
 
 module.exports = app
