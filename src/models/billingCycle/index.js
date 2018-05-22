@@ -3,6 +3,9 @@ const mongoose = require('mongoose')
 const creditSchema = new mongoose.Schema({
   name: { type: String, required: true },
   value: { type: Number, min: 0, required: true },
+  donationId: {
+    type: String,
+  },
 })
 
 const debtSchema = new mongoose.Schema({
@@ -17,9 +20,6 @@ const debtSchema = new mongoose.Schema({
     required: false,
     uppercase: true,
     enum: ['PAGO', 'PENDENTE', 'AGENDADO'],
-  },
-  donationId: {
-    type: String,
   },
 })
 

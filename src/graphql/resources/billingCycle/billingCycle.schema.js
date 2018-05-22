@@ -3,11 +3,13 @@ const creditTypes = `
  type Credit {
   name: String!
   value: Float!
+  donationId: ID
  }
 
  input CreditInput {
   name: String!
   value: Float!
+  donationId: ID
  }
 `
 
@@ -15,13 +17,11 @@ const debtTypes = `
  type Debt {
   name: String!
   value: Float!
-  donationId: ID
  }
 
  input DebtInput {
   name: String!
   value: Float!
-  donationId: ID
  }
 `
 
@@ -69,7 +69,7 @@ const billingCycleMutations = `
   createBillingCycle(input: BillingCycleInput!): BillingCycle
   updateBillingCycle(id: ID!, input: BillingCycleInput): BillingCycle
   deleteBillingCycle(id: ID!): Boolean
-  addToDonationGroup(donationGroup: String!, debt: DebtInput!): BillingCycle
+  addToDonationGroup(donationGroup: String!, credit: CreditInput!): BillingCycle
 `
 
 module.exports = {
