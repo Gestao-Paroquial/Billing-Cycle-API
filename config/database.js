@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-module.exports = mongoose.connect(`${process.env.DB_URI}/db_finance`)
+module.exports = mongoose.connect(`mongodb://${process.env.DB_URI}/db_finance`)
 
 mongoose.Error.messages.general.required = "O atributo '{PATH}' é obrigatório."
 mongoose.Error.messages.Number.min = "O '{VALUE}' informado é menor que o limite mínimo de '{MIN}'."
