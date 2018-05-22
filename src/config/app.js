@@ -7,6 +7,7 @@ const app = express()
 const queryParser = require('express-query-int')
 const jwt = require('express-jwt')
 const cors = require('cors')
+const helmet = require('helmet')
 const allowCors = require('./cors')
 const graphqlHTTP = require('express-graphql')
 
@@ -17,6 +18,7 @@ app.use(bodyParser.json())
 app.use(allowCors)
 app.use(queryParser())
 app.use(cors())
+app.use(helmet())
 
 if (process.env.NODE_ENV !== 'development') app.use(jwt({ secret: process.env.JWT_SECRET }))
 
