@@ -18,12 +18,12 @@ app.use(allowCors)
 app.use(queryParser())
 app.use(cors())
 
+if (process.env.NODE_ENV !== 'development') app.use(jwt({ secret: process.env.JWT_SECRET }))
+
 app.use('/graphql', graphqlHTTP({
   schema,
   graphiql: process.env.NODE_ENV === 'development'
 }))
-
-if (process.env.NODE_ENV !== 'development') app.use(jwt({ secret: process.env.JWT_SECRET }).unless({ path: ['/token'] }))
 
 app.listen(port, () => {
   console.log(`BACKEND is running on port ${port}.`)
