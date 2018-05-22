@@ -12,6 +12,7 @@ const createNewDonationGroup = (donationGroup = '', debt = {}) =>
     donationGroup,
     name: `Doações de ${moment().format('MMMM')} de ${moment().format('YYYY')}`,
     debts: [debt],
+    date: Date.now(),
   })
 
 

@@ -25,7 +25,7 @@ const debtSchema = new mongoose.Schema({
 
 const billingCycleSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  date: { type: Date, require: true },
+  date: { type: Date, required: true },
   comunidade_id: { type: Number, require: true },
   donationGroup: { type: String },
   credits: [creditSchema],
