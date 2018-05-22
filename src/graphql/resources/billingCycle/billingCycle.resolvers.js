@@ -7,6 +7,14 @@ moment.locale('pt-BR')
 
 const sumDebtsOrCredits = (arr = []) => arr.reduce((prev, curr) => prev + curr.value, 0)
 
+const createNewDonationGroup = (donationGroup = '', debt = {}) =>
+  BillingCycle.create({
+    donationGroup,
+    name: `Doações de ${moment().format('MMMM')} de ${moment().format('YYYY')}`,
+    debts: [debt],
+  })
+
+
 const queryResolvers = {
   billingCycle: (parent, { id }) => BillingCycle.findById(id),
   billingCycles: (parent, {
@@ -79,6 +87,16 @@ const mutationsResolver = {
     const billingCycle = await BillingCycle.findByIdAndRemove({ _id: id })
 
     return !!billingCycle
+  },
+  addToDonationGroup: async (parent, { donationGroup, debt }) => {
+    const billingCycle = await BillingCycle.findOneAndUpdate(
+      { donationGroup },
+      { $push: { debts: debt } },
+    )
+
+    if (!billingCycle) return createNewDonationGroup(donationGroup, debt)
+
+    return billingCycle
   },
 }
 

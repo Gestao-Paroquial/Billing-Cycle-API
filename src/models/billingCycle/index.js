@@ -18,12 +18,16 @@ const debtSchema = new mongoose.Schema({
     uppercase: true,
     enum: ['PAGO', 'PENDENTE', 'AGENDADO'],
   },
+  donationId: {
+    type: String,
+  },
 })
 
 const billingCycleSchema = new mongoose.Schema({
   name: { type: String, required: true },
   date: { type: Date, require: true },
   comunidade_id: { type: Number, require: true },
+  donationGroup: { type: String },
   credits: [creditSchema],
   debts: [debtSchema],
 })
