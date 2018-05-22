@@ -11,7 +11,7 @@ const createNewDonationGroup = (donationGroup = '', credit = {}) =>
   BillingCycle.create({
     donationGroup,
     name: `Doações de ${moment().format('MMMM')} de ${moment().format('YYYY')}`,
-    credits: [credit],
+    credits: credit,
     date: Date.now(),
   })
 
@@ -90,14 +90,12 @@ const mutationsResolver = {
     return !!billingCycle
   },
   addToDonationGroup: async (parent, { donationGroup, credit }) => {
-    const billingCycle = await BillingCycle.findOneAndUpdate(
-      { donationGroup },
-      { $push: { credits: credit } },
-    )
-
-    console.log(billingCycle)
+    const billingCycle = await BillingCycle.findOne({ donationGroup })
 
     if (!billingCycle) return createNewDonationGroup(donationGroup, credit)
+
+    billingCycle.credits.push(credit)
+    billingCycle.save()
 
     return billingCycle
   },
