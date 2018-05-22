@@ -1,4 +1,4 @@
-const BillingCycle = require('../../../api/billingCycle/billingCycle')
+const BillingCycle = require('./../../../models/billingCycle')
 
 const moment = require('moment')
 require('moment/locale/pt-br')
@@ -11,29 +11,29 @@ const queryResolvers = {
   billingCycle: (parent, { id }) => BillingCycle.findById(id),
   billingCycles: (parent, {
     first = 0,
-    offset = 10
+    offset = 10,
   }) => BillingCycle
     .find({})
     .skip(first)
     .limit(offset),
   findByComunidadeId: (parent, {
-    comunidade_id
+    comunidade_id,
   }) =>
     BillingCycle.find({
-      comunidade_id
+      comunidade_id,
     }),
-  count: (parent, params) => BillingCycle.count(),
+  count: () => BillingCycle.count(),
   summary: async () => {
     const summary = await BillingCycle.aggregate([
       {
-        $project: { credit: { $sum: '$credits.value' }, debt: { $sum: '$debts.value' } }
+        $project: { credit: { $sum: '$credits.value' }, debt: { $sum: '$debts.value' } },
       },
       {
-        $group: { _id: null, credit: { $sum: '$credit' }, debt: { $sum: '$debt' } }
+        $group: { _id: null, credit: { $sum: '$credit' }, debt: { $sum: '$debt' } },
       },
       {
-        $project: { _id: 0, credit: 1, debt: 1 }
-      }
+        $project: { _id: 0, credit: 1, debt: 1 },
+      },
     ])
 
     return summary.shift()
@@ -50,8 +50,8 @@ const queryResolvers = {
         month: curr,
         summary: {
           credit: 0,
-          debt: 0
-        }
+          debt: 0,
+        },
       })
 
       return prev
@@ -69,7 +69,7 @@ const queryResolvers = {
       monthTurnover.summary.debt += sumOfDebts
     })
     return annualTurnover
-  }
+  },
 }
 
 const mutationsResolver = {
@@ -79,10 +79,10 @@ const mutationsResolver = {
     const billingCycle = await BillingCycle.findByIdAndRemove({ _id: id })
 
     return !!billingCycle
-  }
+  },
 }
 
 module.exports = {
   queryResolvers,
-  mutationsResolver
+  mutationsResolver,
 }

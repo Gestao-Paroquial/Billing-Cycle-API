@@ -72,5 +72,5 @@ module.exports = {
   billingCycleQueries,
   billingCycleMutations,
   debtTypes,
-  creditTypes
+  creditTypes,
 }

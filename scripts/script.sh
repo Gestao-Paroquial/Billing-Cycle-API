@@ -1,4 +1,8 @@
-#!/bin/bash
-set -x # Show the output of the following commands (useful for debugging)
+#!/usr/bin/env sh
+set -x
 
-echo "teste"
+. /root/.nvm/nvm.sh
+cd /var/www/node_api && \
+git pull origin master && \
+npm install --only=production && \
+pm2 restart backend

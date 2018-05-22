@@ -14,11 +14,11 @@ const schemaDefinition = `
 
 const resolvers = {
   Query: {
-    ...queryResolvers
+    ...queryResolvers,
   },
   Mutation: {
-    ...mutationsResolver
-  }
+    ...mutationsResolver,
+  },
 
 }
 
@@ -29,7 +29,7 @@ module.exports = makeExecutableSchema({
     mutation,
     debtTypes,
     creditTypes,
-    billingCycleTypes
+    billingCycleTypes,
   ],
-  resolvers
+  resolvers,
 })

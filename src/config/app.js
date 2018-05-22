@@ -8,9 +8,9 @@ const queryParser = require('express-query-int')
 const jwt = require('express-jwt')
 const cors = require('cors')
 const allowCors = require('./cors')
-const schema = require('../graphql/schema')
-
 const graphqlHTTP = require('express-graphql')
+
+const schema = require('../graphql/schema')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -22,7 +22,7 @@ if (process.env.NODE_ENV !== 'development') app.use(jwt({ secret: process.env.JW
 
 app.use('/graphql', graphqlHTTP({
   schema,
-  graphiql: process.env.NODE_ENV === 'development'
+  graphiql: process.env.NODE_ENV === 'development',
 }))
 
 app.listen(port, () => {
