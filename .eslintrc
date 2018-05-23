@@ -3,5 +3,9 @@
   "rules": {
     "semi": ["error", "never"],
     "camelcase": "off"
+  },
+  "env": {
+    "jest": true,
+    "node": true
   }
 }
