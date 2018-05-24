@@ -6,7 +6,22 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "npm run dev",
-    "production": "pm2 start src/index.js --name backend"
+    "production": "pm2 start src/index.js --name backend",
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "./dist"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "html"
+    ],
+    "moduleNameMapper": {
+      "^mongoose$": "<rootDir>/node_modules/mongoose"
+    }
   },
   "author": "Leonardo Cardoso",
   "license": "ISC",
@@ -28,9 +43,12 @@
     "pm2": "^2.1.5"
   },
   "devDependencies": {
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.12.0",
+    "jest": "^22.4.4",
+    "jest-cli": "^22.4.4",
     "nodemon": "^1.17.3"
   },
   "repository": "https://github.com/Gestao-Paroquial/Billing-Cycle-API.git"

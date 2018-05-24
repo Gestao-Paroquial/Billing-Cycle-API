@@ -1,6 +1,7 @@
 language: node_js
 node_js:
 - 8.9.4
+services: mongodb
 cache:
   yarn: true
   directories:
@@ -8,7 +9,7 @@ cache:
 addons:
   ssh_known_hosts: 165.227.197.233
 script:
-- echo "teste"
+- yarn test --forceExit
 deploy:
   provider: script
   skip_cleanup: true
