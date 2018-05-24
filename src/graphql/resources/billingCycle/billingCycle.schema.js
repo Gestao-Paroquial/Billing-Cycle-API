@@ -54,6 +54,15 @@ const billingCycleTypes = `
     credits: [CreditInput]
     donationGroup: String
   }
+
+  input BillingCycleUpdate {
+    name: String
+    date: String
+    comunidade_id: Int
+    debts: [DebtInput]
+    credits: [CreditInput]
+    donationGroup: String
+  }
 `
 
 const billingCycleQueries = `
@@ -67,7 +76,7 @@ const billingCycleQueries = `
 
 const billingCycleMutations = `
   createBillingCycle(input: BillingCycleInput!): BillingCycle
-  updateBillingCycle(id: ID!, input: BillingCycleInput): BillingCycle
+  updateBillingCycle(id: ID!, input: BillingCycleUpdate!): BillingCycle
   deleteBillingCycle(id: ID!): Boolean
   addToDonationGroup(donationGroup: String!, credit: CreditInput!): BillingCycle
 `

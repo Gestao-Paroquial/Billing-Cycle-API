@@ -23,18 +23,20 @@ describe('billingCycle', () => {
   const arrOfBillingCycles = [billingCycleModel, billingCycleModel]
 
   const fields = `
-  id
-  name
-  date
-  debts {
+    id
     name
-    value
-  }
-  credits {
-    name
-    value
-    donationId
-  }
+    date
+    comunidade_id
+    donationGroup
+    debts {
+      name
+      value
+    }
+    credits {
+      name
+      value
+      donationId
+    }
   `
   beforeEach(async () => {
     await setupTest()
@@ -145,6 +147,135 @@ describe('billingCycle', () => {
 
         expect(annualTurnover.length).toBe(12)
       })
+    })
+  })
+
+  describe('mutations', () => {
+    it('should create a new BillingCycle', async () => {
+      const mutation = `
+      mutation {
+        createBillingCycle(input: {
+          name: "teste"
+          date: "2018-10-10"
+        }){
+          name
+        }
+      }
+      `
+      const { data: { createBillingCycle } } = await graphql(schema, mutation)
+
+      expect(createBillingCycle.name).toBe('teste')
+    })
+    it('should update the name of a BillingCycle', async () => {
+      let mutation = `
+      mutation {
+        createBillingCycle(input: {
+          name: "teste"
+          date: "2018-10-10"
+        }){
+          id
+        }
+      }
+      `
+      const { data: { createBillingCycle: { id } } } = await graphql(schema, mutation)
+
+      mutation = `
+      mutation {
+        updateBillingCycle(id: "${id}" , input: {
+          name: "update"
+        }){
+          name
+          date
+        }
+      }
+      `
+
+      const response = await graphql(schema, mutation)
+
+      expect(response.data.updateBillingCycle.name).toBe('update')
+    })
+    it('should delete a BillingCycle', async () => {
+      let mutation = `
+      mutation {
+        createBillingCycle(input: {
+          name: "teste"
+          date: "2018-10-10"
+        }){
+          id
+        }
+      }
+      `
+      const { data: { createBillingCycle: { id } } } = await graphql(schema, mutation)
+
+      mutation = `
+      mutation {
+        deleteBillingCycle(id: "${id}")
+      }
+      `
+      const response = await graphql(schema, mutation)
+      const billingCycle = await BillingCycle.findById(id)
+
+      expect(response.data.deleteBillingCycle).toBe(true)
+      expect(billingCycle).toBe(null)
+    })
+    it('should create a new donationGroup', async () => {
+      const mutation = `
+      mutation {
+        addToDonationGroup(donationGroup: "teste", credit:{
+          name: "teste"
+          value: 1,
+          donationId: 12
+        }) {
+          id
+          name
+          donationGroup
+          credits {
+            donationId
+            name
+            value
+          }
+
+        }
+      }
+      `
+
+      const billingCycle = await BillingCycle.findOne({ donationGroup: 'teste' })
+      expect(billingCycle).toBe(null)
+      const { data: { addToDonationGroup } } = await graphql(schema, mutation)
+
+
+      expect(addToDonationGroup.donationGroup).toBe('teste')
+    })
+
+    it('should add a new credit to a donationGroup', async () => {
+      const mutation = `
+      mutation {
+        addToDonationGroup(donationGroup: "teste", credit:{
+          name: "teste"
+          value: 1,
+          donationId: 12
+        }) {
+          id
+          name
+          donationGroup
+          credits {
+            donationId
+            name
+            value
+          }
+
+        }
+      }
+      `
+
+
+      await graphql(schema, mutation)
+      const { data: { addToDonationGroup } } = await graphql(schema, mutation)
+
+      const billingCycle = await BillingCycle.findOne({ donationGroup: 'teste' })
+
+      expect(!!billingCycle).toBe(true)
+      expect(addToDonationGroup.credits.length).toBe(2)
     })
   })
 })

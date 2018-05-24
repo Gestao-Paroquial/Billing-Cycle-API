@@ -82,20 +82,22 @@ const queryResolvers = {
 
 const mutationsResolver = {
   createBillingCycle: (parent, { input }) => BillingCycle.create(input),
-  updateBillingCycle: (parent, { id, input }) => BillingCycle.findOneAndUpdate({ _id: id }, input),
+  updateBillingCycle: (parent, { id, input }) => BillingCycle.findOneAndUpdate(
+    { _id: id },
+    input,
+    { new: true },
+  ),
   deleteBillingCycle: async (parent, { id }) => {
     const billingCycle = await BillingCycle.findByIdAndRemove({ _id: id })
 
     return !!billingCycle
   },
   addToDonationGroup: async (parent, { donationGroup, credit }) => {
-    const billingCycle = await BillingCycle.findOne({ donationGroup })
+    const billingCycle = await BillingCycle.findOneAndUpdate({ donationGroup }, {
+      $push: { credits: credit },
+    }, { new: true })
 
     if (!billingCycle) return createNewDonationGroup(donationGroup, credit)
-
-    billingCycle.credits.push(credit)
-    billingCycle.save()
-
     return billingCycle
   },
 }
