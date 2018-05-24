@@ -16,7 +16,12 @@ function sendErrorsOrNext(req, res, next) {
   }
 }
 
+const sumDebtsOrCredits = (arr = []) => arr.reduce((prev, curr) => prev + curr.value, 0)
+
+
 module.exports = {
   parseErrors,
   sendErrorsOrNext,
+  sumDebtsOrCredits,
 }
+

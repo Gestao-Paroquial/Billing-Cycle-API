@@ -1,11 +1,10 @@
 const BillingCycle = require('./../../../models/billingCycle')
+const { sumDebtsOrCredits } = require('./../../../utils')
 
 const moment = require('moment')
 require('moment/locale/pt-br')
 
 moment.locale('pt-BR')
-
-const sumDebtsOrCredits = (arr = []) => arr.reduce((prev, curr) => prev + curr.value, 0)
 
 const createNewDonationGroup = (donationGroup = '', credit = {}) =>
   BillingCycle.create({
