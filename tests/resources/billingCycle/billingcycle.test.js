@@ -17,27 +17,27 @@ describe('billingCycle', () => {
       value: 50,
     }],
   }
+  const fields = `
+  id
+  name
+  date
+  debts {
+    name
+    value 
+  }
+  credits {
+    name
+    value
+    donationId
+  }
+  `
   beforeEach(async () => {
     await setupTest()
-
     await BillingCycle.insertMany([billingCycleModel, billingCycleModel])
   })
+
   describe('querys', () => {
     describe('billingCycles', () => {
-      const fields = `
-      id
-      name
-      date
-      debts {
-        name
-        value 
-      }
-      credits {
-        name
-        value
-        donationId
-      }
-      `
       const query = `
         {
           billingCycles {
@@ -61,6 +61,26 @@ describe('billingCycle', () => {
         const { data: { billingCycles } } = await graphql(schema, query2)
         expect(billingCycles).toBeInstanceOf(Array)
         expect(billingCycles.length).toBe(1)
+      })
+    })
+    describe('billingCycle', () => {
+      it('should return the the correct billingCycle', async () => {
+        const { data: { billingCycles } } = await graphql(schema, `
+        {
+          billingCycles {
+              ${fields}
+          }
+        }
+      `)
+        const { id } = billingCycles[0]
+        const { data: { billingCycle } } = await graphql(schema, `
+        {
+          billingCycle(id: "${id}") {
+              ${fields}
+          }
+        }
+      `)
+        expect(billingCycle.id).toBe(id)
       })
     })
   })
