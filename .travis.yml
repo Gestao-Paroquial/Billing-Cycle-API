@@ -9,7 +9,7 @@ cache:
 addons:
   ssh_known_hosts: 165.227.197.233
 script:
-- echo "teste"
+- yarn test
 deploy:
   provider: script
   skip_cleanup: true
