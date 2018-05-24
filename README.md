@@ -1,16 +1,13 @@
 # Billing Cycle API
 
-## Organização
-A aplicação foi organizada em duas pastas: **api** e **config**.
 
 ### Config
 Basicamente para a aplicação funcionar é necessário configurar:
 - Servidor HTTP (Express)
-- Rotas para a API REST (Express/Node Restful)
+- Schemas do GraphQL
 - Conexão com Banco de Dados (Mongoose/MongoDB).
 
-### Api
-API REST foi implementada utilizando um módulo node chamado [node-restful](https://github.com/baugarten/node-restful).
+
 
 ## Configuração
 
@@ -27,7 +24,7 @@ docker-compose up -d
 $ npm install
 ```
 
-2. Inicializar a aplicação em **modo desenvolvimento** (utilizado no curso).
+2. Inicializar a aplicação em **modo desenvolvimento**.
 ```sh
 $ npm run dev
 ```
