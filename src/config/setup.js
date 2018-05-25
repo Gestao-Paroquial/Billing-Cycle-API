@@ -14,6 +14,6 @@ const createDefaultPedidos = async (name) => {
 }
 
 module.exports = async () => {
-  await createDefaultPedidos('batismo')
-  await createDefaultPedidos('casamento')
+  await createDefaultPedidos('Batismo')
+  await createDefaultPedidos('Casamento')
 }
