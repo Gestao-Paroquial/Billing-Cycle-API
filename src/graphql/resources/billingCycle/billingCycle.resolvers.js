@@ -14,6 +14,13 @@ const createNewDonationGroup = (donationGroup = '', credit = {}) =>
     date: Date.now(),
   })
 
+const createNewPedidoGroup = (pedidoGroup = '', credit = {}) =>
+  BillingCycle.create({
+    pedidoGroup,
+    name: `Pedidos de ${moment().format('MMMM')} de ${moment().format('YYYY')}`,
+    credits: credit,
+    date: Date.now(),
+  })
 
 const queryResolvers = {
   billingCycle: (parent, { id }) => BillingCycle.findById(id),
@@ -98,6 +105,14 @@ const mutationsResolver = {
     }, { new: true })
 
     if (!billingCycle) return createNewDonationGroup(donationGroup, credit)
+    return billingCycle
+  },
+  addToPedidoGroup: async (parent, { pedidoGroup, credit }) => {
+    const billingCycle = await BillingCycle.findOneAndUpdate({ pedidoGroup }, {
+      $push: { credits: credit },
+    }, { new: true })
+
+    if (!billingCycle) return createNewPedidoGroup(pedidoGroup, credit)
     return billingCycle
   },
 }
