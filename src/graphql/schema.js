@@ -1,9 +1,11 @@
 const { makeExecutableSchema } = require('graphql-tools')
 const { query } = require('./query')
 const { mutation } = require('./mutation')
+const { pedidoTypes } = require('./resources/pedido/pedido.schema')
 const { billingCycleTypes, debtTypes, creditTypes } = require('./resources/billingCycle/billingCycle.schema')
-
 const { queryResolvers, mutationsResolver } = require('./resources/billingCycle/billingCycle.resolvers')
+
+const { pedidoQueryResolvers } = require('./resources/pedido/pedido.resolvers')
 
 const schemaDefinition = `
   type Schema {
@@ -15,6 +17,7 @@ const schemaDefinition = `
 const resolvers = {
   Query: {
     ...queryResolvers,
+    ...pedidoQueryResolvers,
   },
   Mutation: {
     ...mutationsResolver,
@@ -27,6 +30,7 @@ module.exports = makeExecutableSchema({
     schemaDefinition,
     query,
     mutation,
+    pedidoTypes,
     debtTypes,
     creditTypes,
     billingCycleTypes,
