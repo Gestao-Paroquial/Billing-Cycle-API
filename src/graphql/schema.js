@@ -5,7 +5,7 @@ const { pedidoTypes } = require('./resources/pedido/pedido.schema')
 const { billingCycleTypes, debtTypes, creditTypes } = require('./resources/billingCycle/billingCycle.schema')
 const { queryResolvers, mutationsResolver } = require('./resources/billingCycle/billingCycle.resolvers')
 
-const { pedidoQueryResolvers } = require('./resources/pedido/pedido.resolvers')
+const { pedidoQueryResolvers, pedidoMutationsResolvers } = require('./resources/pedido/pedido.resolvers')
 
 const schemaDefinition = `
   type Schema {
@@ -21,6 +21,7 @@ const resolvers = {
   },
   Mutation: {
     ...mutationsResolver,
+    ...pedidoMutationsResolvers,
   },
 
 }

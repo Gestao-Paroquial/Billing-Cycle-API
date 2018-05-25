@@ -11,7 +11,12 @@ const pedidoQueries = `
   pedido(name: String!): Pedido!
 `
 
+const pedidoMutations = `
+  changeValue(name: String!, value: Float!): Pedido!
+`
+
 module.exports = {
   pedidoTypes,
   pedidoQueries,
+  pedidoMutations,
 }
