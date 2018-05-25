@@ -4,12 +4,14 @@ const creditTypes = `
   name: String!
   value: Float!
   donationId: ID
+  peididoId: ID
  }
 
  input CreditInput {
   name: String!
   value: Float!
   donationId: ID
+  peididoId: ID
  }
 `
 
@@ -34,6 +36,7 @@ const billingCycleTypes = `
     debts: [Debt]!
     credits: [Credit]!
     donationGroup: String
+    pedidoGroup: String
   }
 
   type Summary {
@@ -53,6 +56,7 @@ const billingCycleTypes = `
     debts: [DebtInput]
     credits: [CreditInput]
     donationGroup: String
+    pedidoGroup: String
   }
 
   input BillingCycleUpdate {
@@ -62,6 +66,7 @@ const billingCycleTypes = `
     debts: [DebtInput]
     credits: [CreditInput]
     donationGroup: String
+    pedidoGroup: String
   }
 `
 
@@ -79,6 +84,7 @@ const billingCycleMutations = `
   updateBillingCycle(id: ID!, input: BillingCycleUpdate!): BillingCycle
   deleteBillingCycle(id: ID!): Boolean
   addToDonationGroup(donationGroup: String!, credit: CreditInput!): BillingCycle
+  addToPedidoGroup(pedidoGroup: String!, credit: CreditInput!): BillingCycle
 `
 
 module.exports = {
