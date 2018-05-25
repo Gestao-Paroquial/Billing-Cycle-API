@@ -8,7 +8,7 @@ const pedidoTypes = `
 
 const pedidoQueries = `
   pedidos: [Pedido!]!
-  pedido(id: ID, name: String): Pedido!
+  pedido(name: String!): Pedido!
 `
 
 module.exports = {
