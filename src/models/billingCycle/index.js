@@ -6,6 +6,9 @@ const creditSchema = new mongoose.Schema({
   donationId: {
     type: String,
   },
+  peididoId: {
+    type: String,
+  },
 })
 
 const debtSchema = new mongoose.Schema({
@@ -28,6 +31,9 @@ const billingCycleSchema = new mongoose.Schema({
   date: { type: Date, required: true },
   comunidade_id: { type: Number },
   donationGroup: {
+    type: String, index: true, unique: true, sparse: true,
+  },
+  pedidoGroup: {
     type: String, index: true, unique: true, sparse: true,
   },
   credits: [creditSchema],
